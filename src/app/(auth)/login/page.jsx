@@ -124,7 +124,7 @@ function Login({searchParams}) {
             </button>
           </form>
           <div className="text-center text-gray-800 flex gap-2 justify-center">
-            Don't have an account?
+            Dont have an account?
             <Link href="/register" className="text-purple-600 hover:underline">
               Sign up
             </Link>

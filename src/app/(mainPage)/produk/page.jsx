@@ -54,6 +54,7 @@ function Page() {
                         height={400}
                         className="object-cover h-full w-full"
                         src="/images.jpeg"
+                        alt=""
                         />
                     </div>
                         <div className="bg-gray-50 flex gap-5 rounded overflow-hidden ">
@@ -61,6 +62,7 @@ function Page() {
                                 <Image
                                 className="w-full h-full"
                                 src='/Roblox_Logo_2022.jpg'
+                                alt=""
                                 height={75}
                                 width={75}
                                 />
@@ -70,11 +72,13 @@ function Page() {
                                 className="w-full h-full"
                                 src='/Roblox_Logo_2022.jpg'
                                 height={75}
+                                alt=""
                                 width={75}
                                 />
                             </button>
                             <button className="overflow-hidden object-cover rounded" style={{ width: "75px", height: "75px" }}>
                                 <Image
+                                alt=""
                                 className="w-full h-full"
                                 src='/Roblox_Logo_2022.jpg'
                                 height={75}
