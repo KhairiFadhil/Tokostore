@@ -67,7 +67,6 @@ export default function RootLayout({ children }) {
           <Navigation lists={dashboardList}/>
           {children}
           </div>
-              
             <Toaster/>
         </SessionWrapper>
         </body>

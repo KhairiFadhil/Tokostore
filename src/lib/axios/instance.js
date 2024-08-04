@@ -8,7 +8,7 @@ const headers = {
 const instance = axios.create({
     baseURL: process.env.BASE_URL,
     timeout: 60 * 1000,
-    headers
+    headers : headers
   });
 
 instance.interceptors.request.use(

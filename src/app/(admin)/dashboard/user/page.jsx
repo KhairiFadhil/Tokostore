@@ -1,27 +1,35 @@
+'use client'
+import Tables from "./table/tables"
+
 import {
     AiOutlineBell,
     AiOutlineMail,
     AiOutlineShoppingCart,
     AiTwotoneShop,
   } from "react-icons/ai";
-import { Payment, columns } from "./columns"
-import DataTable from "./data-table"
+import ModalUpdatedUser from "./ModalUpdateUser"
+import userServices from "@/app/api/service/index";
+import { useEffect, useState } from "react";
 
-async function getData() {
-    // Fetch data from your API here.
-    return [
-      {
-        id: "728ed52f",
-        amount: 100,
-        name: "pending",
-        email: "m@example.com",
-      },
-      // ...
-    ];
-  }
-async function Page(){
-    const data = await getData();
+function Page(){
+    const [data, setData] = useState({});
+    const [isLoading, setIsLoading] = useState(false);
+    const [isError, setIsError] = useState(false);
+    const [isModalUpdated, setIsModalUpdated] = useState({});
+    useEffect(() => {
+    setIsLoading(true)
+        const getAllUser = async () => {
+            const { data } = await userServices.getAllUser()
+            if(!data || data.length === 0){
+                return setIsError(true)
+            }
+            setData(data.data)
+        }
+        getAllUser();
+    setIsLoading(false)
+    }, [])
     return(
+        <>
         <div className="w-full h-full min-h-screen max-w-[1440px] mx-auto">
             
             <div className="flex flex-col m-2">
@@ -40,9 +48,17 @@ async function Page(){
                 </div>      
             </div>
             <div className="container mx-auto py-5 w-full">
-                        <DataTable columns={columns} data={data} />
+                {data.length > 0 && <Tables data={data} setModal={setIsModalUpdated} />}
+                
             </div>
         </div>
+        {
+           Object.keys(isModalUpdated).length
+            && 
+            (<ModalUpdatedUser className=' transition-all' setModal={setIsModalUpdated} data={isModalUpdated} />)
+        }
+        
+    </>
     )
 }
 export default Page

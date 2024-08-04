@@ -4,13 +4,13 @@ import bcrypt from "bcrypt"
 
 const db = getFirestore(app);
 
-export const retrieveData = async (collectionName) => {
+export const retrieveData = async (collectionName, id) => {
   const snapshot = await getDocs(collection(db, collectionName));
   const data = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
   return data;
 };
 
-export async function retrieveDataById(collectionName){
+export async function retrieveDataById(collectionName, id){
     const snapshot = await getDocs(doc(db, collectionName, id));
     const data = snapshot.data
     return data
@@ -24,6 +24,17 @@ export async function retrieveDataByField(collectionName, field, value){
     const data = snapshot.docs.map((doc) => 
         ({ id: doc.id, ...doc.data() }));
     return data;
+}
+
+export async function updateData(collectionName, id, data, callback){
+    const docRef = doc(db, collectionName, id);
+    await updateDoc(docRef, data)
+    .then(() => {
+        callback(true)
+    })
+    .catch((error) => {
+        callback(false)
+    });
 }
 
 export async function Login(
